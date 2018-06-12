@@ -1,13 +1,39 @@
+import javax.swing.plaf.nimbus.State;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
     public static void main(String[] args) {
-        SubClass sub = new SubClass();
+        TheFinalClass finalClass = new TheFinalClass();
 
-        sub.doSomething();
+        StateClass newState = finalClass.getState();
+
+        newState.value = 222;
+
+        System.out.println(finalClass.getState().value);
     }
 }
+
+class TheFinalClass {
+    private StateClass state;
+
+    TheFinalClass() {
+        state = new StateClass(111);
+    }
+
+    StateClass getState() {
+        return state;
+    }
+
+}
+
+class StateClass {
+    int value;
+    StateClass(int value) {
+        this.value = value;
+    }
+}
+
 class SuperClass {
     protected int count = 0;
     synchronized void doSomething() {
